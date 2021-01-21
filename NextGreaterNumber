@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.*;
+
+
+public class NextGreaterNumber
+{
+		// to swap two values 
+		static void swap(char[] ch,int min,int max){
+			char temp = ch[min];
+			ch[min] = ch[max];
+			ch[max] = temp;
+		}
+		
+		static void find(char[] ch,int n){
+			int i;
+			for(i=n-1;i>0;i--){
+				if(ch[i]>ch[i-1]){
+					break;
+				}
+			}
+			if(i==0)	System.out.println("Not Possible");
+			else{
+				int min = i-1, max= i;
+				for(int j=i+1;j<n;j++){
+					if(ch[j] < ch[max] && ch[j] > ch[min]){
+						max = j;
+					}
+				}
+				swap(ch,min,max);
+				Arrays.sort(ch,i,n);
+				for(i=0;i<n;i++){
+					System.out.print(ch[i]+"");
+				}
+			}
+		}
+		
+		public static void main(String[] args){
+			Scanner sc = new Scanner(System.in);
+			String num = sc.next();
+			char[] ch = num.toCharArray();
+			int n=ch.length;
+			find(ch,n);
+			sc.close();
+		}
+}
